@@ -35,21 +35,21 @@ class myUserManger(BaseUserManager):
 
 
 class myUser(AbstractBaseUser):
-    username       = models.CharField(verbose_name="username",max_length=30,unique=True)
-    email          = models.EmailField(verbose_name="email",max_length=100,unique=True)
+    username       = models.CharField(verbose_name="username",max_length=100,unique=True)
+    email          = models.EmailField(verbose_name="email",max_length=255,unique=True)
     date_joined    = models.DateTimeField(verbose_name="date join",auto_now_add=True)
     last_login     = models.DateTimeField(verbose_name="last login",auto_now=True)
     is_admin       = models.BooleanField(default=False) 
     is_active      = models.BooleanField(default=True) 
     is_staff       = models.BooleanField(default=False) 
     is_superuser   = models.BooleanField(default=False)
-
-    USERNAME_FIELD   = 'username' 
-    REQUIRED_FIELDS  = ['email',]
+    is_management  = models.BooleanField(default=False)
+    USERNAME_FIELD   = 'email' 
+    REQUIRED_FIELDS  = ['username',]
 
     objects = myUserManger()
     def __str__(self):
-        return self.username
+        return self.email
 
     def has_perm(self,perm,obj=None):
         return self.is_admin

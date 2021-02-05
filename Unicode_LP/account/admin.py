@@ -3,7 +3,7 @@ from account.models import myUser
 from django.contrib.auth.admin import UserAdmin
 # Register your models here.
 class myUserAdmin(UserAdmin):
-    list_display=('username','email','date_joined','last_login','is_admin')
+    list_display=('username','email','date_joined','last_login','is_admin','is_management')
     search_fields=('username','email')
     readonly_fields=('date_joined','last_login')
 

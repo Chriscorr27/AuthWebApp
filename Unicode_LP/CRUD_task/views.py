@@ -166,6 +166,8 @@ def mail_info(request,id):
                 mail.seenby_recv=True
         mail.save()
         chats = Chat_model.objects.all().filter(mail=mail)
+        
+
         chat_infos=[]
         for chat in chats:
             isFile=chat.file!=""
@@ -188,7 +190,7 @@ def mail_info(request,id):
                 'seenby_recv': mail.seenby_recv,
                 'date_Of_Msg':mail.date_Of_Msg
         }
-            #print(mail.chat)
+            #print(mail_dict)
         chat_infos.reverse()
         content={'mail':mail_dict,'form':form,'chat_infos':chat_infos}
         return render(request,"mail_info.html",content)
